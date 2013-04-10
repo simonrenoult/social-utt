@@ -11,6 +11,15 @@ class CookiesManager {
   
   // ------------ CONSTANTS ------------ //
   
+  const ONE_DAY = 86400;
+  const SEVEN_DAYS = 604800;
+  const THIRTY_DAYS = 2592000;
+  const SIX_MONTHS = 15811200;
+  const ONE_YEAR = 31536000;
+  const LIFE8_TIME = 1893456000; // 2030-01-01 00:00:00
+  
+  const DEFAULT_PATH = '/';
+  
   // ------------ METHODS ------------ //
   
   /**
@@ -45,10 +54,30 @@ class CookiesManager {
     return self :: exists ( $name )  ? $_COOKIE[$name] : $defaultValue;
   }
   
-  public static function set ( $name, $value, $expirationValue ) {
-    setcookie ( $name, $value, $expirationValue );
+  public static function set ( $name, $value, $expiry = self :: THIRTY_DAYS ) {
+    $cookieIsSet = false;
+    if ( ! headers_sent ( ) ) {
+      
+      if ( is_numeric ( $expiry ) ) {
+        $expiry += time ( );
+      } else {
+        $expiry = strtotime ( $expiry );
+      }
+      
+      $cookieIsSet = @setcookie ( $name, $value, $expiry );
+    }
+    
+    return $cookieIsSet;
   }
   
+  public static function delete ( $name ) {
+    $cookieIsSet = false;
+    if ( ! headers_sent ( ) ) {
+      $cookieIsSet = @setcookie( $name, '', 1 );
+    }
+    
+    return $cookieIsSet;
+  }
 }
 
 ?>

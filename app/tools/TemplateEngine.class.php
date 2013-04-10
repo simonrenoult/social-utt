@@ -27,7 +27,6 @@ class TemplateEngine {
     
   // ------------ METHODS ------------ //
   
-  
   public function runOn ( $template_file ) {
     $path = self :: TEMPLATE_DIR . $template_file;
     if ( file_exists ( $path ) ) {

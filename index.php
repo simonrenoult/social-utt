@@ -1,5 +1,5 @@
 <?php
-
+ 
     define ( 'EXTENSION', '.php' );
     define ( 'CLASS_EXTENSION', '.class' . EXTENSION );
     

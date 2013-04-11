@@ -51,7 +51,9 @@ class UserManager extends ModelManager {
       try {
         $statement -> execute ( array_values (  $this -> _user -> getData ( ) ) );
       } catch ( \PDOException $e ) {
-        if ( $e -> errorInfor[1] == DatabaseConnector::DUPLICATE_ENTRY)
+        if ( $e -> errorInfor[1] == DatabaseConnector::DUPLICATE_ENTRY ) {
+          // TODO Handle PDO Duplicate entry exception.
+        }
       } 
       
       return new HTTPResponse ( HTTPResponse::CREATED, 'Resource has been saved.' );

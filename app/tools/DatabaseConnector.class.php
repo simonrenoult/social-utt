@@ -1,13 +1,14 @@
 <?php
 
-namespace app\models;
+namespace app\tools;
 
 class DatabaseConnector {
 
   // -------- CONSTANTS -------- //
 
   const PATH_TO_CONF_FILE = './config/config.ini';
-
+  const DUPLICATE_ENTRY = 1062;
+  
   // -------- ATTRIBUTES -------- //
   
   private static $SINGLETON;

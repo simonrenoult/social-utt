@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use \app\models as Models;
+use app\tools\HTTPResponse as HTTPResponse;
+use app\tools\DatabaseConnector as DatabaseConnector;
 
 class UserManager extends ModelManager {
 
@@ -16,6 +18,11 @@ class UserManager extends ModelManager {
   
   // ------------ CONSTRUCTORS ------------ //
    
+  public function __construct ( $db, $user ) {
+    parent::__construct ( $db );
+    $this -> setUser ( $user );
+  }
+  
   // ------------ METHODS ------------ //
  
   /**
@@ -40,9 +47,14 @@ class UserManager extends ModelManager {
       ';
 
       $statement = $this -> _db -> prepare ( $sql );
-      $statement -> execute ( array_values (  $this -> _user -> getData ( ) ) );
+      $httpCode = null;
+      try {
+        $statement -> execute ( array_values (  $this -> _user -> getData ( ) ) );
+      } catch ( \PDOException $e ) {
+        if ( $e -> errorInfor[1] == DatabaseConnector::DUPLICATE_ENTRY)
+      } 
       
-      return new Models\HTTPResponse ( 201, 'Resource has been saved.' );
+      return new HTTPResponse ( HTTPResponse::CREATED, 'Resource has been saved.' );
     }
   }
   

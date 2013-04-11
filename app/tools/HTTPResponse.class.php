@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\tools;
 
 /*
  * To change this template, choose Tools | Templates
@@ -14,6 +14,12 @@ namespace app\models;
  */
 class HTTPResponse {
 
+  // ------------ CONSTANTS ------------ //
+  
+  const CONTENT_TYPE = "text/html; charset=UTF-8";
+  
+  const CREATED = 201;
+  
   // ------------ ATTRIBUTES ------------ //
   
   private $_httpCode;
@@ -25,6 +31,20 @@ class HTTPResponse {
     $this -> setHttpCode ( $httpCode );
     $this -> setMessage ( $message );
   }
+  
+  // ------------ METHODS ------------ //
+  
+  public function toArray( ) {
+    return array (
+        "headers" => array ( 
+          "content-type" => self :: CONTENT_TYPE,
+          "status" => $this -> _httpCode,
+        ), 
+        "body" => $this -> _message
+    );
+  }
+  
+  // ------------ SETTERS ------------ //
   
   public function setHttpCode ( $httpCode ) {
     $this -> _httpCode = $httpCode;

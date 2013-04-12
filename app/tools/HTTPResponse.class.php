@@ -16,9 +16,14 @@ class HTTPResponse {
 
   // ------------ CONSTANTS ------------ //
   
-  const CONTENT_TYPE = "text/html; charset=UTF-8";
+  const CONTENT_TYPE_HTML = "text/html; charset=UTF-8";
+  const CONTENT_TYPE_JSON = "application/json; charset=UTF-8";
   
-  const CREATED = 201;
+  const OK = 200;
+  const CREATED = 201; 
+  const OK_NO_CONTENT = 204; 
+  const NOT_FOUND = 400;
+  const CONFLICT = 409;
   
   // ------------ ATTRIBUTES ------------ //
   
@@ -34,14 +39,22 @@ class HTTPResponse {
   
   // ------------ METHODS ------------ //
   
-  public function toArray( ) {
+  public function toArray ( ) {
     return array (
         "headers" => array ( 
-          "content-type" => self :: CONTENT_TYPE,
+          "content-type" => self :: CONTENT_TYPE_HTML,
           "status" => $this -> _httpCode,
         ), 
         "body" => $this -> _message
     );
+  }
+  
+  public function toString ( ) {
+    
+  }
+  
+  public function toJson ( ) {
+    
   }
   
   // ------------ SETTERS ------------ //

@@ -6,8 +6,9 @@ class DatabaseConnector {
 
   // -------- CONSTANTS -------- //
 
-  const PATH_TO_CONF_FILE = './config/config.ini';
+  const PATH_TO_CONF_FILE = './conf/config.ini';
   const DUPLICATE_ENTRY = 1062;
+  const CONNECTION_DENIED = 1045;
   
   // -------- ATTRIBUTES -------- //
   
@@ -53,8 +54,10 @@ class DatabaseConnector {
       );
       
       $conn -> setAttribute ( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
-    } catch ( Exception $e ) {
-      echo 'Connection failed.';
+    } catch ( \PDOException $e ) {
+      if ( $e -> errorInfo[1] == self::CONNECTION_DENIED ) {
+       echo 'Database connection denied.'; 
+      }
     }
     
     return $conn;

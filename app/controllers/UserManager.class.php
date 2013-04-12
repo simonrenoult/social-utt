@@ -47,16 +47,16 @@ class UserManager extends ModelManager {
       ';
 
       $statement = $this -> _db -> prepare ( $sql );
-      $httpCode = null;
+      $http_code = \HTTPResponse::CREATED;
       try {
         $statement -> execute ( array_values (  $this -> _user -> getData ( ) ) );
       } catch ( \PDOException $e ) {
-        if ( $e -> errorInfor[1] == DatabaseConnector::DUPLICATE_ENTRY ) {
-          // TODO Handle PDO Duplicate entry exception.
+        if ( $e -> errorInfo[1] == DatabaseConnector::DUPLICATE_ENTRY ) {
+          HTTPResponse::CONFLICT;
         }
       } 
       
-      return new HTTPResponse ( HTTPResponse::CREATED, 'Resource has been saved.' );
+      return new HTTPResponse ( $http_code , 'Resource has been saved.' );
     }
   }
   
@@ -108,7 +108,7 @@ class UserManager extends ModelManager {
       $statement -> execute ( array ( $fieldValue ) );
       $userData = $statement -> fetchAll ( );
       
-      return new Models\User( $userData  );
+      return new Models\User ( $userData  );
     }
   }
   

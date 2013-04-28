@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <head>
-    <meta charset="utf-8">
-    <title><?= $this -> vars['title'] ?></title>
+    <meta charset="utf-8" />
+    <title>Social UTT</title>
   </head>
   <body>
     

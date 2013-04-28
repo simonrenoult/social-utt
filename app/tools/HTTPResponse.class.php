@@ -27,7 +27,7 @@ class HTTPResponse {
   
   // ------------ CONSTRUCTORS ------------ //
   
-  public function __construct ( $httpCode, $message ) {
+  public function __construct ( $httpCode = null, $message = null) {
     $this -> setHttpCode ( $httpCode );
     $this -> setMessage ( $message );
   }
@@ -50,7 +50,7 @@ class HTTPResponse {
     $this -> _httpCode = $httpCode;
   }
   
-  public function setMessage ( $message) {
+  public function setMessage ( $message ) {
     $this -> _message = $message;
   }
 }

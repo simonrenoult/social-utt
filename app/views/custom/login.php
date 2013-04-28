@@ -1,18 +1,15 @@
-<div class="container">
-  <section id="content">
-    <form action="">
-      <h1>Login Form</h1>
-      <div>
-        <input type="text" placeholder="Username" required="" id="username" />
-      </div>
-      <div>
-        <input type="password" placeholder="Password" required="" id="password" />
-      </div>
-      <div>
-        <input type="submit" value="Log in" />
-        <a href="#">Lost your password?</a>
-        <a href="#">Register</a>
-      </div>
-    </form><!-- form -->
-  </section><!-- content -->
-</div><!-- container -->
+﻿<!DOCTYPE html>
+<html lang="fr">
+  <head>
+		<title>Social UTT</title>
+		<!-- Bootstrap -->
+		<link href="../../../public/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+  </head>
+  <body>
+    
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../../../public/js/bootstrap.min.js"></script>
+    
+  </body>
+</html>

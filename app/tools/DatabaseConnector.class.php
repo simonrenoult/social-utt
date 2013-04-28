@@ -6,7 +6,7 @@ class DatabaseConnector {
 
   // -------- CONSTANTS -------- //
 
-  const PATH_TO_CONF_FILE = './config/config.ini';
+  const PATH_TO_CONF_FILE = 'config/config.ini';
   const DUPLICATE_ENTRY = 1062;
   
   // -------- ATTRIBUTES -------- //
@@ -24,7 +24,7 @@ class DatabaseConnector {
    * configuration file content.
    */
   private function __construct ( ) {
-    $confFile = parse_ini_file ( self :: PATH_TO_CONF_FILE );
+    $confFile = parse_ini_file ( PATH . self :: PATH_TO_CONF_FILE );
     $this -> setConf ( $confFile );
     
     $dbConnection = $this -> connect ( );
